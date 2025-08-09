@@ -1,6 +1,7 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEditorInternal;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class Dron : MonoBehaviour
 {
@@ -33,7 +34,7 @@ public class Dron : MonoBehaviour
         }
     }
 
-    private void moveTarget(Transform target)
+    public void moveTarget(Transform target)
     {
         transform.position = Vector3.MoveTowards(transform.position, target.position, _speed);
         transform.LookAt(target.position);
@@ -62,6 +63,7 @@ public class Dron : MonoBehaviour
         if (collision.gameObject.TryGetComponent(out Base baseCenter))
         {
             UnloadCargo(baseCenter);
+            
             baseCenter.AddDron(this);
         }
         else if (collision.gameObject.TryGetComponent(out Resource resource))
@@ -84,7 +86,7 @@ public class Dron : MonoBehaviour
         isHaveCommands = true;
     }
 
-    private void UnloadCargo(Base baseCenter)
+    private void UnloadCargo(Base baseCanter)
     {
         foreach(Transform child in transform)
         {
@@ -95,9 +97,9 @@ public class Dron : MonoBehaviour
                 tempResource.transform.parent = null;
                 isHaveResourse = false;
                 target = null;
-                Destroy(tempResource);
+                resource.Destroyed();
 
-                baseCenter.AddResource();
+                baseCanter.AddResource();
             }
         }
        
@@ -110,4 +112,13 @@ public class Dron : MonoBehaviour
         isHaveResourse = true;
         isHaveCommands = false;
     }
+
+
+    public void Initialized(Transform bases, Transform[] ways)
+    {
+        _base = bases;
+        _wayPoints = ways;
+    }
+
+  
 }

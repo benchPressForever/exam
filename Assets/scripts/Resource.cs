@@ -17,4 +17,10 @@ public class Resource : MonoBehaviour
     }
 
 
+    public void Destroyed()
+    {
+        Destroy(this.gameObject);
+    }
+
+
 }

@@ -12,21 +12,22 @@ public class Spawner : MonoBehaviour
 
     private WaitForSeconds _wait;
     private Vector3 _spawnPosition;
+    private float _positionResY = 0.26f;
 
 
     void Start()
     {
         _wait = new WaitForSeconds(_delay);
-        StartCoroutine(Spawn());
+        StartCoroutine(SpawnResources());
     }
 
-    private IEnumerator Spawn()
+    private IEnumerator SpawnResources()
     {
         while (enabled)
         {
             _spawnPosition = new Vector3(
                 Random.Range(_min.position.x, _max.position.x), 
-                0.26f, 
+                _positionResY, 
                 Random.Range(_min.position.z, _max.position.z));
 
             Instantiate(_prefab, _spawnPosition, Quaternion.identity, _container);
@@ -34,6 +35,9 @@ public class Spawner : MonoBehaviour
         }
 
     }
+
+
+
 
 
 }
