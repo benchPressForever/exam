@@ -1,9 +1,6 @@
-using UnityEditor.Experimental.GraphView;
-using UnityEditorInternal;
 using UnityEngine;
-using UnityEngine.EventSystems;
 
-public class Dron : MonoBehaviour
+public class NewDron : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private Transform _base;
@@ -12,7 +9,7 @@ public class Dron : MonoBehaviour
 
 
     private int currentWayPoint = 0;
-    private bool isHaveCommands = false;
+    private bool isHaveCommand = false;
     private bool isHaveResourse = false;
     private Transform target;
     private Resource tempResource;
@@ -20,11 +17,13 @@ public class Dron : MonoBehaviour
 
     private void Update()
     {
-        if (isHaveCommands)
+
+        if (isHaveCommand == true)
         {
             moveTarget(target);
+
         }
-        else if (isHaveResourse)
+        else if (isHaveResourse == true)
         {
             moveTarget(_base);
         }
@@ -44,65 +43,69 @@ public class Dron : MonoBehaviour
 
     private void freeMove()
     {
-        transform.position = Vector3.MoveTowards(transform.position, _wayPoints[currentWayPoint].position,_speed);
+        transform.position = Vector3.MoveTowards(transform.position, _wayPoints[currentWayPoint].position, _speed);
         transform.LookAt(_wayPoints[currentWayPoint]);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.TryGetComponent(out Point point))
+        if (other.gameObject.TryGetComponent(out Point point))
         {
             currentWayPoint = ++currentWayPoint % _wayPoints.Length;
-
         }
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.TryGetComponent(out Base baseCenter))
+        if (collision.gameObject.TryGetComponent(out NewBase baseCenter))
         {
-            UnloadCargo(baseCenter);
-            
-            baseCenter.AddDron(this);
+            if (isHaveResourse)
+            {
+                UnloadCargo();
+                baseCenter.AddCountResource();
+                baseCenter.AddDron(this);
+            }
+
+
         }
         else if (collision.gameObject.TryGetComponent(out Resource resource))
         {
-            if(target != null)
+            if (target != null)
             {
                 if (resource.transform.position == target.position)
                 {
                     LoadCargo(resource);
                 }
             }
-            
-           
+
+
         }
     }
 
     public void takeComand(Transform resource)
     {
         target = resource;
-        isHaveCommands = true;
+        isHaveCommand = true;
     }
 
-    private void UnloadCargo(Base baseCanter)
+    private void UnloadCargo()
     {
-        foreach(Transform child in transform)
+        foreach (Transform child in transform)
         {
             if (child.gameObject.TryGetComponent(out Resource resource))
             {
                 tempResource = resource;
-
                 tempResource.transform.parent = null;
                 isHaveResourse = false;
                 target = null;
                 resource.Destroyed();
+                tempResource = null;
+                break;
 
-                baseCanter.AddResource();
             }
         }
-       
+
     }
 
     private void LoadCargo(Resource resource)
@@ -110,9 +113,8 @@ public class Dron : MonoBehaviour
         resource.transform.SetParent(this.transform);
         resource.transform.position = _cargoPlace.position;
         isHaveResourse = true;
-        isHaveCommands = false;
+        isHaveCommand = false;
     }
-
 
     public void Initialized(Transform bases, Transform[] ways)
     {
@@ -120,5 +122,4 @@ public class Dron : MonoBehaviour
         _wayPoints = ways;
     }
 
-  
 }

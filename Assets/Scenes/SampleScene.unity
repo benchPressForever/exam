@@ -466,6 +466,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1280832482}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &405143938 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4231722584954849518, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
+  m_PrefabInstance: {fileID: 4968797808919049845}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -679,8 +684,9 @@ GameObject:
   - component: {fileID: 532863396}
   - component: {fileID: 532863395}
   - component: {fileID: 532863394}
-  - component: {fileID: 532863398}
   - component: {fileID: 532863399}
+  - component: {fileID: 532863400}
+  - component: {fileID: 532863401}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -806,7 +812,38 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 532863392}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &532863398
+--- !u!114 &532863399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532863392}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8d299c2076c8d4a4ca455973a9a3d8cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scaner: {fileID: 532863400}
+  _drones:
+  - {fileID: 629477649666448681, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
+  _text: {fileID: 1507611366}
+  _ground: {fileID: 597902143}
+  _containerDrones: {fileID: 567055544}
+  _dronPrefab: {fileID: 629477649666448681, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
+  _waysPoints:
+  - {fileID: 132530309}
+  - {fileID: 829263022}
+  - {fileID: 1265195226}
+  - {fileID: 1381849329}
+  _startPoint: {fileID: 357133741}
+  _endPoint: {fileID: 253573866}
+  target: {fileID: 0}
+  countRes: 0
+  _spawnPosition: {x: 0, y: 0, z: 0}
+  _positionDronY: 0.119
+  _isBuildFlag: 0
+--- !u!114 &532863400
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -818,8 +855,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ee42747e0a61d4dbc9fb3e85c8e2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scanRadius: 8
---- !u!114 &532863399
+  _scanRadius: 6
+--- !u!114 &532863401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -828,16 +865,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 532863392}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8d299c2076c8d4a4ca455973a9a3d8cc, type: 3}
+  m_Script: {fileID: 11500000, guid: 90a945a4c93f0634a90d1eb758212c3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scaner: {fileID: 532863398}
+  _scaner: {fileID: 532863400}
   _drones:
-  - {fileID: 629477649666448681, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
+  - {fileID: 1545705339}
   _text: {fileID: 1507611366}
   _ground: {fileID: 597902143}
   _containerDrones: {fileID: 567055544}
-  _dronPrefab: {fileID: 629477649666448681, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
+  _dronPrefab: {fileID: 5206632558733218667, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
   _waysPoints:
   - {fileID: 132530309}
   - {fileID: 829263022}
@@ -1024,10 +1061,10 @@ MonoBehaviour:
   _containerBases: {fileID: 310067481}
   _containerDrons: {fileID: 567055544}
   _containerPoints: {fileID: 1794730159}
-  _basePrefab: {fileID: 1705734838554582994, guid: 6c1383d8f5fd8e0408ae76516d0145b6, type: 3}
-  _pointPrefab: {fileID: 4583047232200224599, guid: 2808ff4eb530a264f99dd4fa1fdcb7aa, type: 3}
+  _basePrefab: {fileID: 7089839817046851855, guid: 6c1383d8f5fd8e0408ae76516d0145b6, type: 3}
   _startPoint: {fileID: 357133741}
   _endPoint: {fileID: 253573866}
+  _flagPrefab: {fileID: 7967074039373540181, guid: 1f5deda60b245434bb4bbf3f25b38536, type: 3}
 --- !u!1 &608603725
 GameObject:
   m_ObjectHideFlags: 0
@@ -1480,18 +1517,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5117833900071623706, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
   m_PrefabInstance: {fileID: 4968797808919049845}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1545705329 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 629477649666448681, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
-  m_PrefabInstance: {fileID: 4968797808919049845}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 638950540}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f0c3b55c845afbe42af87d221af00c81, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1545705334
+--- !u!114 &1545705339
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1500,26 +1526,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 638950540}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Script: {fileID: 11500000, guid: cd3468535fbebf04684ffa38a54a0cce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates:
-  - eventID: 4
-    callback:
-      m_PersistentCalls:
-        m_Calls:
-        - m_Target: {fileID: 1545705329}
-          m_TargetAssemblyTypeName: Dron, Assembly-CSharp
-          m_MethodName: OnPClick
-          m_Mode: 1
-          m_Arguments:
-            m_ObjectArgument: {fileID: 0}
-            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-            m_IntArgument: 0
-            m_FloatArgument: 0
-            m_StringArgument: 
-            m_BoolArgument: 0
-          m_CallState: 2
+  _speed: 0.1
+  _base: {fileID: 532863393}
+  _wayPoints:
+  - {fileID: 132530309}
+  - {fileID: 829263022}
+  - {fileID: 1265195226}
+  - {fileID: 1381849329}
+  _cargoPlace: {fileID: 405143938}
 --- !u!1 &1794730158
 GameObject:
   m_ObjectHideFlags: 0
@@ -1718,6 +1735,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 532863393}
     - target: {fileID: 629477649666448681, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 629477649666448681, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
       propertyPath: '_wayPoints.Array.data[0]'
       value: 
       objectReference: {fileID: 132530309}
@@ -1777,13 +1798,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 5206632558733218667, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 1912805400783724459, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1545705334}
+      addedObject: {fileID: 1545705339}
   m_SourcePrefab: {fileID: 100100000, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

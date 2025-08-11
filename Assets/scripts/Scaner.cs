@@ -27,6 +27,7 @@ public class Scaner : MonoBehaviour
                 {
                     resources.Enqueue(res);
                     res.Checked();
+                    Debug.Log(resources.Count);
                 }
             }
         }

@@ -6,18 +6,20 @@ public class Ground : MonoBehaviour, IPointerClickHandler
     [SerializeField] private Transform _containerBases;
     [SerializeField] private Transform _containerDrons;
     [SerializeField] private Transform _containerPoints;
-    [SerializeField] private Base _basePrefab;
-    [SerializeField] private Point _pointPrefab;
+    [SerializeField] private NewBase _basePrefab;
     [SerializeField] private Transform _startPoint;
     [SerializeField] private Transform _endPoint;
-    [SerializeField] private Transform _flagPrefab;
+    [SerializeField] private Flag _flagPrefab;
 
 
     private Vector3 _lastPositionClick;
     private bool _baseSave = false;
+    private bool _flagInstall = false;
     private float _positionBaseY = 0.1796f;
-    private float _radiusBase = 0.24f;
-    private Dron _dron;
+    private float _positionFlagY = 0.586f;
+    private NewDron _dron;
+    private NewBase _parentBase;
+    private Flag _flag;
 
     void Start()
     {
@@ -32,53 +34,66 @@ public class Ground : MonoBehaviour, IPointerClickHandler
     public void OnPointerClick(PointerEventData eventData)
     {
         _lastPositionClick = eventData.pointerCurrentRaycast.worldPosition;
-
-        _lastPositionClick.y = _positionBaseY;
-
-        Debug.Log($"Позиция в мире: {_lastPositionClick}");
-
-        //постройка базы
-        if (_baseSave)
+        //постройка флага
+        if (_baseSave && _flagInstall == false)
         {
-            
-            SpawnBase();
-            _baseSave = false;
+            SpawnFlag();
+            _parentBase.BuildFlag();
+            _flagInstall = true;
+        }
+        else if (_flagInstall)
+        {
+            SwapPositionFlag();
         }
         
 
     }
 
-    public void addClickBase(Dron dron)
+    
+
+    public void AddFlag(NewBase parentBase)
     {
-        _dron = dron;
         _baseSave = true;
-        //добавление базы в список ожидания (или хранить только последнюю базу из которой придёт дрон)
+        _parentBase = parentBase;
+    }
+
+    public void addClickBase(NewDron dron)
+    {
+        _flagInstall = false;
+        if(_flag != null)
+        {
+            _flag.Destroed();
+        }
+        _dron = dron;
+        SpawnBase();
+       
     }
 
     private void SpawnBase()
     {
-        
 
-        //перемещение дрона
-
-        //постройка флага 
-
-        //удаление флага
-
-        //постройка базы
-        
-        Base baseCenter = Instantiate(_basePrefab, _lastPositionClick, Quaternion.identity, _containerBases);
+        _lastPositionClick.y = _positionBaseY;
+        NewBase baseCenter = Instantiate(_basePrefab, _lastPositionClick, Quaternion.identity, _containerBases);
         baseCenter.Initialized(this, _containerDrons,_startPoint,_endPoint);
         baseCenter.replacePoints();
         baseCenter.AddDron(_dron);
         _dron.moveTarget(baseCenter.transform);
         _dron.Initialized(baseCenter.transform,baseCenter.getWayPoints());
-        //инициализация базы 
-        //продумать "правильный спавн в виде дерева где вложенность внутри базы это точки , дроны , и тд"
-
-        //добавление дрона
-           //заменить wayPoints с проверкой выхода за границы
+        _flag.Destroed();
     }
+
+
+    private void SpawnFlag()
+    {
+        _lastPositionClick.y = _positionFlagY;
+        _flag = Instantiate(_flagPrefab, _lastPositionClick, Quaternion.identity, this.transform);
+    }
+
+    private void SwapPositionFlag()
+    {
+        _flag.transform.position = _lastPositionClick;
+    }
+
 
 
 }

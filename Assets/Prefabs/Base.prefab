@@ -116,6 +116,7 @@ GameObject:
   - component: {fileID: 8294289756980899254}
   - component: {fileID: 2728065175495022713}
   - component: {fileID: 1705734838554582994}
+  - component: {fileID: 7089839817046851855}
   m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
@@ -253,7 +254,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ee42747e0a61d4dbc9fb3e85c8e2bb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scanRadius: 8
+  _scanRadius: 6
 --- !u!114 &1705734838554582994
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -261,7 +262,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3475468496994412090}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8d299c2076c8d4a4ca455973a9a3d8cc, type: 3}
   m_Name: 
@@ -273,6 +274,31 @@ MonoBehaviour:
   _ground: {fileID: 0}
   _containerDrones: {fileID: 0}
   _dronPrefab: {fileID: 629477649666448681, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
+  _waysPoints:
+  - {fileID: 4771015850897695942}
+  - {fileID: 5349218892532807639}
+  - {fileID: 6452403664617962631}
+  - {fileID: 14226553607093571}
+  _startPoint: {fileID: 0}
+  _endPoint: {fileID: 0}
+--- !u!114 &7089839817046851855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3475468496994412090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90a945a4c93f0634a90d1eb758212c3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _scaner: {fileID: 2728065175495022713}
+  _drones: []
+  _text: {fileID: 3489390436688130072}
+  _ground: {fileID: 0}
+  _containerDrones: {fileID: 0}
+  _dronPrefab: {fileID: 5206632558733218667, guid: 8c864a7ddb7dc3c4e8ef5beeeae4a1cf, type: 3}
   _waysPoints:
   - {fileID: 4771015850897695942}
   - {fileID: 5349218892532807639}
